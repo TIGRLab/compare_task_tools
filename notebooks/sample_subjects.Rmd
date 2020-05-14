@@ -64,15 +64,6 @@ filtered_task_df <-
 ```{r}
 subject_list <-
   filtered_task_df %>%
-  group_by(subject_id) %>%
-  count() %>%
-  filter(n > 5) %>%
-  select(subject_id) %>%
-  unlist()
-```
-
-```{r}
-filtered_task_df %>%
   filter(subject_id %in% subject_list) %>%
   select(subject_id, group) %>%
   unique() %>%
@@ -80,7 +71,8 @@ filtered_task_df %>%
   sample_n(5) %>%
   ungroup() %>%
   select(subject_id) %>%
-  arrange(subject_id) %>%
+  arrange(subject_id)
+
+subject_list %>%
   write_tsv(here("data/subject_list.txt"), col_names = FALSE)
 ```
-
