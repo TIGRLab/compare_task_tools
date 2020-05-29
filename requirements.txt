@@ -1,0 +1,5 @@
+nilearn
+nistats
+numpy
+pandas
+pybids
