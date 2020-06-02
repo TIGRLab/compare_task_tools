@@ -1,5 +1,6 @@
 # Comparison of fMRI Task Analysis Software
 
+[![Binder][binder_svg]][binder_url]
 
 Working Group Goals
 
@@ -39,3 +40,5 @@ Next Steps:
         if dissimilar examine design matrix to see if they can converge
         parametric modulator - most likely will differ 
 
+[binder_svg]: https://mybinder.org/badge_logo.svg
+[binder_url]: https://mybinder.org/v2/gh/TIGRLab/compare_task_tools/master
