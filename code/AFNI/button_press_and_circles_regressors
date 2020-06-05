@@ -1,0 +1,23 @@
+
+# cat button presses for each run and change commas to tabs, then save as 1D file for use in 3ddeconvolve
+# also change commas to tabs for circles regressors
+
+sub_dir=$(ls -d -- /projects/loliver/SPINS_GLM_Test/sub*/) # lists test subject directories
+
+for dir in ${sub_dir}; do
+    subj=$(basename ${dir})
+
+    cat ${dir}/${subj}_1ea_buttons.csv ${dir}/${subj}_2ea_buttons.csv ${dir}/${subj}_3ea_buttons.csv | sed 's/,/ /g' > ${dir}/${subj}_ea_buttons.1D
+
+    cat ${dir}/${subj}_1circ_buttons.csv ${dir}/${subj}_2circ_buttons.csv ${dir}/${subj}_3circ_buttons.csv | sed 's/,/ /g' > ${dir}/${subj}_circ_buttons.1D
+
+    sed 's/,/ /g' ${dir}/${subj}_circles.csv > ${dir}/${subj}_circles.1D
+
+done
+
+# replace with tabs 's/,/\t/g'
+
+
+
+
+
