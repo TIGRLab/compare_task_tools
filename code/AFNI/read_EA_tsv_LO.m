@@ -15,7 +15,7 @@ sdir = ddirs(ddx).name
 cd /mnt/tigrlab/projects/loliver/SPINS_GLM_Test/
 cd(sdir)
 
-flist = dir('*EMP*.tsv')
+flist = dir('*EAtask*.tsv')  % was previously *EMP*.tsv
 
 
 for idx = 1:size(flist,1)
