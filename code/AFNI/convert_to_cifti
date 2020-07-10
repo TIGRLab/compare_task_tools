@@ -1,0 +1,15 @@
+
+# convert nifti outputs back to cifti
+
+module load connectome-workbench 
+
+sub_dir=$(ls -d -- /projects/loliver/SPINS_GLM_Test/sub-*) # lists test subject directories
+
+for dir in ${sub_dir}; do
+    subj=$(basename ${dir})
+
+    wb_command -cifti-convert -from-nifti ${dir}/${subj}_glm_ea_1stlevel.nii.gz /projects/colin/SPINS/EA_test_spm/${subj}/${subj}_ses-01_task-emp_run-1_desc-preproc_Atlas_s6.dtseries.nii ${dir}/${subj}_glm_ea_1stlevel.dscalar.nii -reset-scalars
+
+done
+
+
