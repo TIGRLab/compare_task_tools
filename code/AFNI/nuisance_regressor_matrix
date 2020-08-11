@@ -1,12 +1,12 @@
 
-# extract tsv columns of interest for nuisance regression from respective tsvs and cat into one 1D matrix for 3ddeconvolve input 
+# grab confound tsv files, cut first 4 TRs and combine runs 
 
 sub_dir=$(ls -d -- /projects/loliver/SPINS_GLM_Test/sub*/) # lists test subject directories
 
 for dir in ${sub_dir}; do
     subj=$(basename ${dir})
 
-    con_dir="/scratch/jjeyachandra/bidsify/SPINS/output/fmriprep/${subj}/ses-01/func"
+    con_dir="/archive/data/SPINS/pipelines/bids_apps/fmriprep/${subj}/ses-01/func"
 
 # cat the runs for each of the tsv varieties, removing the first five rows (header and first 4 TRs) from each
 # the -s option forces sed to condsider the files separately rather than as a continuous set
@@ -15,9 +15,11 @@ for dir in ${sub_dir}; do
 
     sed -s '1,5d' ${con_dir}/${subj}_ses-01_task-emp_run-1_desc-confounds_regressors_fixed.tsv ${con_dir}/${subj}_ses-01_task-emp_run-2_desc-confounds_regressors_fixed.tsv ${con_dir}/${subj}_ses-01_task-emp_run-3_desc-confounds_regressors_fixed.tsv > ${dir}/${subj}_ea_confounds_fixed.tsv
 
-# paste the two confound files together, keeping the fd, motion, motion derivatives, and mean wm, and mean csf regressors 
+# paste the two confound files together, keeping the fd, motion, motion derivatives, and mean wm, and mean csf regressors - column numbers differ, so this is no good
    
-   paste ${dir}/${subj}_ea_confounds.tsv ${dir}/${subj}_ea_confounds_fixed.tsv | cut -f15,68-69,72-73,76-77,80-81,84-85,88-89,133-134 > ${dir}/${subj}_ea_confounds_glm.1D
+   paste ${dir}/${subj}_ea_confounds.tsv ${dir}/${subj}_ea_confounds_fixed.tsv > ${dir}/${subj}_ea_confounds_combined.tsv
+
+#| cut -#f15,68-69,72-73,76-77,80-81,84-85,88-89,133-134 
 
 done
 
